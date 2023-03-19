@@ -100,37 +100,37 @@ const app = createApp({
           }, []);
         // Máxima asistencia stats
         let maxAttendance = Math.max(
-          ...this.cards.map((elem) =>
-            elem.assistance
-              ? elem.assistance / elem.capacity
-              : elem.estimate / elem.capacity
+          ...this.cards.map((event) =>
+            event.assistance
+              ? event.assistance / event.capacity
+              : event.estimate / event.capacity
           )
         );
-        let arrayMayorAsist = this.cards.filter((elem) =>
-          elem.assistance
-            ? elem.assistance / elem.capacity == maxAttendance
-            : elem.estimate / elem.capacity == maxAttendance
+        let arrayMayorAsist = this.cards.filter((event) =>
+          event.assistance
+            ? event.assistance / event.capacity == maxAttendance
+            : event.estimate / event.capacity == maxAttendance
         );
         this.mayorAsist = arrayMayorAsist[0];
         // Mínima asistencia stats
         let minAttendance = Math.min(
-          ...this.cards.map((elem) =>
-            elem.assistance
-              ? elem.assistance / elem.capacity
-              : elem.estimate / elem.capacity
+          ...this.cards.map((event) =>
+            event.assistance
+              ? event.assistance / event.capacity
+              : event.estimate / event.capacity
           )
         );
-        let arrayMenAsist = this.cards.filter((elem) =>
-          elem.assistance
-            ? elem.assistance / elem.capacity == minAttendance
-            : elem.estimate / elem.capacity == minAttendance
+        let arrayMenAsist = this.cards.filter((event) =>
+          event.assistance
+            ? event.assistance / event.capacity == minAttendance
+            : event.estimate / event.capacity == minAttendance
         );
         this.menAsist = arrayMenAsist[0];
         // Capacidad Máxima stats
 
-        let maxCapacity = Math.max(...this.cards.map((elem) => elem.capacity));
+        let maxCapacity = Math.max(...this.cards.map((event) => event.capacity));
         let arrayMaxCapacity = this.cards.filter(
-          (elem) => elem.capacity == maxCapacity
+          (event) => event.capacity == maxCapacity
         );
         this.capMaxima = arrayMaxCapacity[0];
       })
@@ -139,9 +139,9 @@ const app = createApp({
   computed: {
     filtro() {
       this.cardsFiltradas = this.cards.filter(
-        (elem) =>
-          (this.checked.includes(elem.category) || this.checked.length === 0) &&
-          elem.name.toLowerCase().includes(this.search.toLowerCase().trim())
+        (event) =>
+          (this.checked.includes(event.category) || this.checked.length === 0) &&
+          event.name.toLowerCase().includes(this.search.toLowerCase().trim())
       );
     },
   },
