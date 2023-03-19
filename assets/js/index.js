@@ -9,12 +9,13 @@ const app = createApp({
       cardsFiltradas: [],
       checked: [],
       search: "",
+      detalles: {},
       categorias: [],
       categoryUpcoming: [],
       categoryPast: [],
       mayorAsist: {},
       menAsist: {},
-      capMaxima: {}
+      capMaxima: {},
     }
     },created(){
       fetch(url)
@@ -33,37 +34,42 @@ const app = createApp({
         }
         this.cardsFiltradas = this.cards;
         this.categorias = [...new Set(this.cards.map(e => e.category))];
+        //Details
+        const queryString = location.search;
+        const params = new URLSearchParams(queryString);
+        const id = params.get('id');
+        this.detalles = this.cards.find(event => event._id == id)
         //Próximos
-        this.categoryUpcoming = this.cards.filter(elem=>{if(elem.estimate){return elem}})
-        .map(elem =>
-          elem = {category: elem.category,
-            revenue: elem.price*elem.capacity,
-            attendance: elem.estimate/elem.capacity
+        this.categoryUpcoming = this.cards.filter(event=>{if(event.estimate){return event}})
+        .map(event =>
+          event = {category: event.category,
+            revenue: event.price*event.capacity,
+            attendance: event.estimate/event.capacity
           }
-        ).reduce((array, elem) =>{
-          const categoryCoincidence = array.find(e => e.category == elem.category);
+        ).reduce((array, event) =>{
+          const categoryCoincidence = array.find(e => e.category == event.category);
           if (categoryCoincidence){
-            categoryCoincidence.revenue += elem.revenue;
-            categoryCoincidence.attendance = (categoryCoincidence.attendance+elem.attendance)/2;
+            categoryCoincidence.revenue += event.revenue;
+            categoryCoincidence.attendance = (categoryCoincidence.attendance+event.attendance)/2;
           } else{
-            array.push(elem);
+            array.push(event);
           }
           return array;
         },[]);
         //Pasados
-        this.categoryPast = this.cards.filter(elem=>{if(elem.assistance){return elem}})
-        .map(elem =>
-          elem = {category: elem.category,
-            revenue: elem.price*elem.capacity,
-            attendance: elem.assistance/elem.capacity
+        this.categoryPast = this.cards.filter(event=>{if(event.assistance){return event}})
+        .map(event =>
+          event = {category: event.category,
+            revenue: event.price*event.capacity,
+            attendance: event.assistance/event.capacity
           }
-        ).reduce((array, elem) =>{
-          const categoryCoincidence = array.find(e => e.category == elem.category);
+        ).reduce((array, event) =>{
+          const categoryCoincidence = array.find(e => e.category == event.category);
           if (categoryCoincidence){
-            categoryCoincidence.revenue += elem.revenue;
-            categoryCoincidence.attendance = (categoryCoincidence.attendance+elem.attendance)/2;
+            categoryCoincidence.revenue += event.revenue;
+            categoryCoincidence.attendance = (categoryCoincidence.attendance+event.attendance)/2;
           } else{
-            array.push(elem);
+            array.push(event);
           }
           return array;
         },[]);
