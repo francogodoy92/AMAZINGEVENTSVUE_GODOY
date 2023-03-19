@@ -80,7 +80,11 @@
 						</tr>
 					</thead>
 					<tbody id="tablaEventsStadistics">
-
+						<tr>
+						<td >{{mayorAsist.name}} {{mayorAsist.assistance ? (mayorAsist.assistance/mayorAsist.capacity*100).toFixed(2) : (mayorAsist.estimate/mayorAsist.capacity*100).toFixed(2)}}%</td>
+                        <td >{{menAsist.name}} {{menAsist.assistance ? (menAsist.assistance/menAsist.capacity*100).toFixed(2) : (menAsist.estimate/menAsist.capacity*100).toFixed(2)}}%</td>
+                        <td >{{capMaxima.name}} </td>
+						</tr>
 					</tbody>
 				</table>
 				<h2>Upcoming events statistics by category</h2>
@@ -93,7 +97,11 @@
 						</tr>
 					</thead>
 					<tbody id="tablaUpcomingEvents">
-
+						<tr v-for="event of categoryUpcoming">
+							<td>{{event.category}}</td>
+							<td>${{event.revenue.toLocaleString()}},00</td>
+							<td>{{(event.attendance*100).toFixed(2)}}%</td>
+						</tr>
 					</tbody>
 				</table>
 				<h2>Past events statistics by category</h2>
@@ -106,7 +114,11 @@
 						</tr>
 					</thead>
 					<tbody id="tablaPastEvents">
-
+						<tr v-for="event of categoryPast">
+							<td>{{event.category}}</td>
+							<td>${{event.revenue.toLocaleString()}},00</td>
+							<td>{{(event.attendance*100).toFixed(2)}}%</td>
+						</tr>
 					</tbody>
 				</table>
 			</section>

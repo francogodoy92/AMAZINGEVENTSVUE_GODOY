@@ -46,13 +46,7 @@
 					</div>
 				</div>
 			</nav>
-			<!-- <nav class="navbar">
-        <a class="nav-link" href="../index.html">Home</a>
-        <a class="nav-link" href="#">Upcoming Events</a>
-        <a class="nav-link" href="./pastEvents.html">Past Events</a>
-        <a class="nav-link" href="./contact.html">Contact</a>
-        <a class="nav-link" href="./stats.html">Stats</a>
-      </nav> -->
+			
 		</header>
 		<main class="d-flex flex-column">
 			<div class="d-flex justify-content-between align-items-center
@@ -86,21 +80,21 @@
 				id="form-father">
 					<form class="form-checkbox">
 						<fieldset id="checkbox">
-							<template v-if="categories" v-for="category in categories">
-								<input type="checkbox" v-model="checked" v-bind:id="category" v-bind:value="category">
-								<label v-bind:for="category">{{category}}
+							<template v-if="categorias" v-for="category in categorias">
+								<label v-bind:for="category" class="text-white m-2">{{category}}
 								</label>
+								<input type="checkbox" v-model="checked" v-bind:id="category" v-bind:value="category">
 							</template>
 						</fieldset>
 					</form>
 					<form id="search">
 						<fieldset>
-							<input v-model="search" type="search" name="search" id="search" placeholder="Search your event">
+							<input v-model="search" type="search" name="search" id="input-text" placeholder="Search your event">
 						</fieldset>
 					</form>
 				</section>
 				<section class="row m-2 d-flex justify-content-center" id="container-cards">
-					<template v-if="filteredCards.length > 0" v-for="card of filteredCards">
+					<template v-if="cardsFiltradas.length > 0" v-for="card of cardsFiltradas">
 						<div class="card col-md-3 m-3">
 							<img :src="card.image" alt="Event Image">
 								<h3>{{card.name}}</h3>   
@@ -111,12 +105,10 @@
 								</div>
 						</div>
 					</template>
-					<div v-else>
-						<section>
-							<span class="img" style='background-image: url("../assets/img/404.gif");'></span>
-							<h3>Not Result Found 😿</h3>
-							<h5>Sorry, we couldn't find any results</h5>
-						</section>
+					<div v-else class="card col-md-3 m-3 ">
+						<img src="../assets/img/404.gif" alt="error image">
+							<h3>Event not found</h3>   
+							<p>Please check your search parameters</p>
 					</div>
 				</section>
 				{{filtro}}
