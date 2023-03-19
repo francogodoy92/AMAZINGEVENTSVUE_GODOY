@@ -108,14 +108,7 @@ const app = createApp({
         },5000)
       })
       .catch(error => console.log(error))
-      .finally(() => {
-        setTimeout(function(){
-          if(document.querySelector(".spinner") && document.querySelector(".cards")){
-            document.querySelector(".spinner").style.display = "none";
-            document.querySelector(".cards").style.display = "flex";
-          }
-        },1800);
-      });
+      
     },computed:{
       filtro(){
         this.filteredCards = this.cards.filter(elem =>
@@ -127,61 +120,3 @@ const app = createApp({
   })
   
   app.mount('#app')
-
-
-
-
-/* const { createApp } = Vue
-const url = './assets/amazing.json'
-const app = createApp( {
-    data(){
-        return {
-            events : [],
-            categories : [],
-            eventsFiltrados : [],
-            valorBusqueda : '',
-            checked : [],
-            event: undefined,
-            titulo: '',
-
-        }
-    },
-     created(){
-      this.getData()
-    },
-    methods: {
-        async getData(){
-            try {
-                const response = await fetch(url)
-                const data = await response.json()
-                if( document.title.includes('Details') ){
-                    let aux = location.search
-                    let params = new URLSearchParams(aux)
-                    let id = params.get('id')
-                    this.event = data.find( event => event._id === id )
-                    this.titulo = this.event.name
-                }else{
-    
-                    const fn = event => event.category
-                    this.events = data.filter( fn )
-                    this.eventsFiltrados = this.events
-                    this.categories = [ ...new Set(this.events.map( fn )) ]
-                } 
-                return data           
-           } catch (error) {
-                console.log( error )
-           }
-        }
-    },
-    computed: {
-        filtro(){
-            this.eventsFiltrados = this.events.filter( event => 
-             (this.checked.includes(event.category) || this.checked.length === 0) 
-             && event.name.toLowerCase().includes(this.valorBusqueda.toLowerCase()))
-         }
-    }
-
-
-} )
-app.mount("#app")
- */

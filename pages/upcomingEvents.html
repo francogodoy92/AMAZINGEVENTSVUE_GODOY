@@ -81,21 +81,46 @@
 					</div>
 				</div>
 			</section>
-			<section class="form container-fluid d-flex justify-content-between"
+			<div id="app">
+				<section class="form container-fluid d-flex justify-content-between"
 				id="form-father">
-				<form class="form-checkbox">
-					<fieldset id="checkbox"></fieldset>
-				</form>
-				<form id="search">
-					<fieldset>
-						<input type="text" id="input-text" placeholder="Search your event">
-						<!-- <input type="submit" id="submit" value="Search"> -->
-					</fieldset>
-				</form>
-			</section>
-
-			<section class="row m-2 d-flex justify-content-center" id="container-cards">
-			</section>
+					<form class="form-checkbox">
+						<fieldset id="checkbox">
+							<template v-if="categories" v-for="category in categories">
+								<input type="checkbox" v-model="checked" v-bind:id="category" v-bind:value="category">
+								<label v-bind:for="category">{{category}}
+								</label>
+							</template>
+						</fieldset>
+					</form>
+					<form id="search">
+						<fieldset>
+							<input v-model="search" type="search" name="search" id="search" placeholder="Search your event">
+						</fieldset>
+					</form>
+				</section>
+				<section class="row m-2 d-flex justify-content-center" id="container-cards">
+					<template v-if="filteredCards.length > 0" v-for="card of filteredCards">
+						<div class="card col-md-3 m-3">
+							<img :src="card.image" alt="Event Image">
+								<h3>{{card.name}}</h3>   
+								<p>{{card.category}}</p>
+								<div class="item-card">
+									<p>${{card.price}}</p>
+									<a class="btn" v-bind:href="'./details.html?id='+card._id" >View More</a>
+								</div>
+						</div>
+					</template>
+					<div v-else>
+						<section>
+							<span class="img" style='background-image: url("../assets/img/404.gif");'></span>
+							<h3>Not Result Found 😿</h3>
+							<h5>Sorry, we couldn't find any results</h5>
+						</section>
+					</div>
+				</section>
+				{{filtro}}
+			</div>
 		</main>
 
 		<footer
@@ -113,7 +138,7 @@
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 			crossorigin="anonymous"></script>
-		<script src="../assets/js/amazing.js"></script>
-		<script type="module" src="../assets/js/upcomingEvents.js"></script>
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+		<script type="module" src="../assets/js/index.js"></script>
 	</body>
 </html>
