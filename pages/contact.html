@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Contact</title>
+		<link
+			rel="icon"
+			type="image/png"
+			href="../assets/img/logoAmazingEvents.png">
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+			crossorigin="anonymous">
+		<link rel="stylesheet" href="../assets/styles/styles.css">
+	</head>
+	<body>
+		<header class="d-flex justify-content-between">
+			<img src="../assets/img/logoAmazingEvents.png" alt="logo" class="logo">
+			<nav class="navbar navbar-expand-lg">
+				<div class="container-fluid">
+					<div class="d-flex">
+						<button
+							class="navbar-toggler"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#navbarNav"
+							aria-controls="navbarNav"
+							aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div
+							class="collapse navbar-collapse align-items-end"
+							id="navbarNav">
+							<ul class="navbar-nav">
+								<li class="nav-item">
+									<a class="nav-link" href="../index.html">Home</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="./upcomingEvents.html">Upcoming Events</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="./pastEvents.html">Past Events</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link active" href="#">Contact</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="./stats.html">Stats</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</nav>
+			<!-- <nav class="navbar">
+        <a class="nav-link" href="../index.html">Home</a>
+        <a class="nav-link" href="./upcomingEvents.html">Upcoming Events</a>
+        <a class="nav-link" href="./pastEvents.html">Past Events</a>
+        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link" href="./stats.html">Stats</a>
+      	</nav> -->
+		</header>
+
+		<main>
+			<div class="d-flex justify-content-between align-items-center
+				container-flechas">
+				<a href="./pastEvents.html" class="flechaBtn"><img
+						src="../assets/img/arrow.png" id="flechaIzq" alt="indicador"></a>
+				<h1>Contact Us</h1>
+				<a href="./stats.html" class="flechaBtn"><img src="../assets/img/arrow.png"
+						id="flechaDer" alt="indicador"></a>
+			</div>
+			<section
+				id="carouselExampleSlidesOnly"
+				class="carousel slide"
+				data-bs-ride="carousel">
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img
+							src="../assets/img/uno.jpg"
+							class="d-block w-100"
+							alt="carousel1">
+					</div>
+					<div class="carousel-item">
+						<img
+							src="../assets/img/dos.jpeg"
+							class="d-block w-100"
+							alt="carousel2">
+					</div>
+				</div>
+			</section>
+
+			<form action="#" class="d-flex justify-content-center">
+				<fieldset
+					class="form-contact d-flex justify-content-center flex-column gap-2 p-1">
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name">
+					<label for="email">Email</label>
+					<input type="email" id="email">
+					<label for="comments">Comments</label>
+					<textarea name="comments" id="comments" cols="10" rows="3"></textarea>
+					<input class="submitContact" type="submit" id="enviar" value="Send">
+				</fieldset>
+			</form>
+		</main>
+
+		<footer class="d-flex align-items-center justify-content-between mt-5">
+			<div>
+				<img src="../assets/img/instagram.png" alt="instagram">
+				<img src="../assets/img/facebook.png" alt="facebook">
+				<img src="../assets/img/whatsapp.png" alt="whatsapp">
+			</div>
+			<p>FE06-TN</p>
+		</footer>
+		<!--Javascript-->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+			crossorigin="anonymous"></script>
+	</body>
+</html>

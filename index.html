@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="image/png" href="./assets/img/logoAmazingEvents.png">
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+			crossorigin="anonymous">
+		<link rel="stylesheet" href="./assets/styles/styles.css">
+		<title>Home</title>
+	</head>
+	<body>
+		<header class="d-flex justify-content-between">
+			<img src="./assets/img/logoAmazingEvents.png" class="logo" alt="logo">
+			<nav class="navbar navbar-expand-lg ">
+				<div class="container-fluid">
+					<div class="d-flex">
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+							data-bs-target="#navbarNav"
+							aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle
+							navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse align-items-end" id="navbarNav">
+							<ul class="navbar-nav">
+								<li class="nav-item">
+									<a class="nav-link active" href="#">Home</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="./pages/upcomingEvents.html">Upcoming Events</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="./pages/pastEvents.html">Past Events</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="./pages/contact.html">Contact</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="./pages/stats.html">Stats</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<main class="d-flex flex-column">
+
+			<div class="d-flex justify-content-between align-items-center
+				container-flechas">
+				<a href="./pages/stats.html" class="flechaBtn"><img
+						src="./assets/img/arrow.png" id="flechaIzq" alt="indicador"></a>
+				<h1>Home</h1>
+				<a href="./pages/upcomingEvents.html" class="flechaBtn"><img
+						src="./assets/img/arrow.png" id="flechaDer" alt="indicador"></a>
+			</div>
+			<section id="carouselExampleSlidesOnly"
+				class="carousel slide banner"
+				data-bs-ride="carousel">
+				<div class="carousel-inner">
+
+					<div class="carousel-item active">
+						<img
+							src="./assets/img/uno.jpg"
+							class="d-block w-100"
+							alt="carousel1">
+					</div>
+					<div class="carousel-item">
+						<img
+							src="./assets/img/dos.jpeg"
+							class="d-block w-100"
+							alt="carousel2">
+					</div>
+				</div>
+			</section>
+			<div id="app">
+				<section class="form container-fluid d-flex justify-content-between"
+					id="form-father">
+					<form class="form-checkbox">
+						<fieldset id="checkbox">
+							<template v-if="categories" v-for="category in categories">
+								<input type="checkbox" v-model="checked" v-bind:id="category"
+									v-bind:value="category">
+								<label v-bind:for="category">{{category}}
+								</label>
+							</template>
+						</fieldset>
+					</form>
+					<form id="search">
+						<fieldset>
+							<input v-model="search" type="search" name="search" id="search" placeholder="Search">
+							<!-- <input type="submit" id="submit" value="Search"> -->
+						</fieldset>
+					</form>
+				</section>
+
+				<section class="row m-2 d-flex justify-content-center" id="container-cards">
+					<template v-if="filteredCards.length > 0" v-for="card of filteredCards">
+						<div class="card col-md-3 m-3">
+							<img :src="card.image" alt="Event Image">
+								<h3>{{card.name}}</h3>   
+								<p>{{card.category}}</p>
+								<div class="item-card">
+									<p>${{card.price}}</p>
+									<a class="btn" v-bind:href="'./pages/details.html?id='+card._id" >View More</a>
+								</div>
+						</div>
+						
+					</template>
+					<div v-else>
+						<section>
+							<span class="img" style='background-image: url("/assets/img/404.gif");'></span>
+							<h3>Not Result Found 😿</h3>
+							<h5>Sorry, we couldn't find any results</h5>
+						</section>
+					</div>
+				</section>
+			{{ filtro }}
+			</div>
+			</main>
+		<footer
+			class="d-flex align-items-center justify-content-between mt-5">
+			<div>
+				<img src="./assets/img/instagram.png" alt="instagram">
+				<img src="./assets/img/facebook.png" alt="facebook">
+				<img src="./assets/img/whatsapp.png" alt="whatsapp">
+			</div>
+
+			<p>FE06-TN</p>
+		</footer>
+		<!--Javascript bootstrap-->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+			crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+		<script type="module" src="./assets/js/index.js"></script>
+	</body>
+</html>
