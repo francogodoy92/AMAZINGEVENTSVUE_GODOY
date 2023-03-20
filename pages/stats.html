@@ -81,9 +81,9 @@
 					</thead>
 					<tbody id="tablaEventsStadistics">
 						<tr>
-						<td >{{mayorAsist.name}} {{mayorAsist.assistance ? (mayorAsist.assistance/mayorAsist.capacity*100).toFixed(2) : (mayorAsist.estimate/mayorAsist.capacity*100).toFixed(2)}}%</td>
-                        <td >{{menAsist.name}} {{menAsist.assistance ? (menAsist.assistance/menAsist.capacity*100).toFixed(2) : (menAsist.estimate/menAsist.capacity*100).toFixed(2)}}%</td>
-                        <td >{{capMaxima.name}} </td>
+						<td >{{mayorAsist.name}}: {{mayorAsist.assistance ? (mayorAsist.assistance/mayorAsist.capacity*100).toFixed(2) : (mayorAsist.estimate/mayorAsist.capacity*100).toFixed(0)}}%</td>
+                        <td >{{menAsist.name}}: {{menAsist.assistance ? (menAsist.assistance/menAsist.capacity*100).toFixed(2) : (menAsist.estimate/menAsist.capacity*100).toFixed(0)}}%</td>
+                        <td >{{capMaxima.name}}: {{capMaxima.capacity}}</td>
 						</tr>
 					</tbody>
 				</table>
