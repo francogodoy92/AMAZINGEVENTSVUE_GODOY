@@ -5,17 +5,17 @@ const url = "../assets/amazing.json";
 const app = createApp({
   data() {
     return {
+      checked: [],
       cards: [],
       cardsFiltradas: [],
-      checked: [],
-      search: "",
       detalles: {},
+      busqueda: "",
       categorias: [],
-      categoryUpcoming: [],
-      categoryPast: [],
       mayorAsist: {},
       menAsist: {},
       capMaxima: {},
+      categoryUpcoming: [],
+      categoryPast: [],
     };
   },
   created() {
@@ -37,13 +37,12 @@ const app = createApp({
         }
         this.cardsFiltradas = this.cards;
         this.categorias = [...new Set(this.cards.map((e) => e.category))];
-        //Details
-        const queryString = location.search;
-        const params = new URLSearchParams(queryString);
-        const id = params.get("id");
+          //Details
+        const queryString = location.busqueda;
+        const parametros = new URLSearchParams(queryString);
+        const id = parametros.get("id");
         this.detalles = this.cards.find((event) => event._id == id);
-        //Stats Tabla
-        
+          //Stats Tabla        
         let maxAttendance = Math.max(
           ...this.cards.map((event) =>
             event.assistance
@@ -137,7 +136,7 @@ const app = createApp({
       this.cardsFiltradas = this.cards.filter(
         (event) =>
           (this.checked.includes(event.category) || this.checked.length === 0) &&
-          event.name.toLowerCase().includes(this.search.toLowerCase().trim())
+          event.name.toLowerCase().includes(this.busqueda.toLowerCase().trim())
       );
     },
   },
