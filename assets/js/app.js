@@ -84,7 +84,7 @@ const app = createApp({
             (event) =>
               (event = {
                 category: event.category,
-                revenue: event.price * event.capacity,
+                revenue: event.price * event.estimate,
                 attendance: event.estimate / event.capacity,
               })
           )
@@ -111,7 +111,7 @@ const app = createApp({
             (event) =>
               (event = {
                 category: event.category,
-                revenue: event.price * event.capacity,
+                revenue: event.price * event.assistance,
                 attendance: event.assistance / event.capacity,
               })
           )
