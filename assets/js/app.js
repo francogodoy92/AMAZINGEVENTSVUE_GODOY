@@ -20,15 +20,15 @@ const app = createApp({
   },
   created() {
     fetch(url)
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((data) => {
-        if (document.title.includes("Upcoming Events")) {
-          //Filtro eventos para Upcoming Events
+        //Filtro eventos para Upcoming Events
+        if (document.title.includes("Upcoming")) {
           this.cards = data.events.filter(
             (event) => event.date >= data.currentDate
           );
-        } else if (document.title.includes("Past Events")) {
           //Filtro eventos para Past Events
+        } else if (document.title.includes("Past")) {
           this.cards = data.events.filter(
             (event) => event.date < data.currentDate
           );
@@ -42,7 +42,39 @@ const app = createApp({
         const params = new URLSearchParams(queryString);
         const id = params.get("id");
         this.detalles = this.cards.find((event) => event._id == id);
-        //Próximos
+        //Stats Tabla
+        
+        let maxAttendance = Math.max(
+          ...this.cards.map((event) =>
+            event.assistance
+              ? event.assistance / event.capacity
+              : event.estimate / event.capacity
+          )
+        );
+        let arrayMayorAsist = this.cards.filter((event) =>
+          event.assistance
+            ? event.assistance / event.capacity == maxAttendance
+            : event.estimate / event.capacity == maxAttendance
+        );
+        this.mayorAsist = arrayMayorAsist[0];
+        let minAttendance = Math.min(
+          ...this.cards.map((event) =>
+            event.assistance
+              ? event.assistance / event.capacity
+              : event.estimate / event.capacity
+          )
+        );
+        let arrayMenAsist = this.cards.filter((event) =>
+          event.assistance
+            ? event.assistance / event.capacity == minAttendance
+            : event.estimate / event.capacity == minAttendance
+        );
+        this.menAsist = arrayMenAsist[0];
+        let maxCapacity = Math.max(...this.cards.map((event) => event.capacity));
+        let arrayMaxCapacity = this.cards.filter(
+          (event) => event.capacity == maxCapacity
+        );
+        this.capMaxima = arrayMaxCapacity[0];
         this.categoryUpcoming = this.cards
           .filter((event) => {
             if (event.estimate) {
@@ -58,19 +90,18 @@ const app = createApp({
               })
           )
           .reduce((array, event) => {
-            const categoryCoincidence = array.find(
+            const idemCategory = array.find(
               (e) => e.category == event.category
             );
-            if (categoryCoincidence) {
-              categoryCoincidence.revenue += event.revenue;
-              categoryCoincidence.attendance =
-                (categoryCoincidence.attendance + event.attendance) / 2;
+            if (idemCategory) {
+              idemCategory.revenue += event.revenue;
+              idemCategory.attendance =
+                (idemCategory.attendance + event.attendance) / 2;
             } else {
               array.push(event);
             }
             return array;
           }, []);
-        //Pasados
         this.categoryPast = this.cards
           .filter((event) => {
             if (event.assistance) {
@@ -86,53 +117,18 @@ const app = createApp({
               })
           )
           .reduce((array, event) => {
-            const categoryCoincidence = array.find(
+            const idemCategory = array.find(
               (e) => e.category == event.category
             );
-            if (categoryCoincidence) {
-              categoryCoincidence.revenue += event.revenue;
-              categoryCoincidence.attendance =
-                (categoryCoincidence.attendance + event.attendance) / 2;
+            if (idemCategory) {
+              idemCategory.revenue += event.revenue;
+              idemCategory.attendance =
+                (idemCategory.attendance + event.attendance) / 2;
             } else {
               array.push(event);
             }
             return array;
           }, []);
-        // Máxima asistencia stats
-        let maxAttendance = Math.max(
-          ...this.cards.map((event) =>
-            event.assistance
-              ? event.assistance / event.capacity
-              : event.estimate / event.capacity
-          )
-        );
-        let arrayMayorAsist = this.cards.filter((event) =>
-          event.assistance
-            ? event.assistance / event.capacity == maxAttendance
-            : event.estimate / event.capacity == maxAttendance
-        );
-        this.mayorAsist = arrayMayorAsist[0];
-        // Mínima asistencia stats
-        let minAttendance = Math.min(
-          ...this.cards.map((event) =>
-            event.assistance
-              ? event.assistance / event.capacity
-              : event.estimate / event.capacity
-          )
-        );
-        let arrayMenAsist = this.cards.filter((event) =>
-          event.assistance
-            ? event.assistance / event.capacity == minAttendance
-            : event.estimate / event.capacity == minAttendance
-        );
-        this.menAsist = arrayMenAsist[0];
-        // Capacidad Máxima stats
-
-        let maxCapacity = Math.max(...this.cards.map((event) => event.capacity));
-        let arrayMaxCapacity = this.cards.filter(
-          (event) => event.capacity == maxCapacity
-        );
-        this.capMaxima = arrayMaxCapacity[0];
       })
       .catch((error) => console.log(error));
   },
@@ -146,5 +142,4 @@ const app = createApp({
     },
   },
 });
-
 app.mount("#app");
